@@ -1,9 +1,17 @@
 window.addEventListener("load", function () {
   clipboard = new ClipboardJS("#copy-button");
-  copyButton = document.getElementById("copy-button");
   clipboard.on("success", function (e) {
-    e.clearSelection();
+    e.trigger.title = "Copied!";
+    var tooltip = new bootstrap.Tooltip(e.trigger);
+    tooltip.show();
+    setTimeout(() => {
+      tooltip.hide();
+      e.trigger.removeAttribute("data-bs-original-title");
+      e.trigger.title = "";
+      e.clearSelection();
+    }, 300);
   });
+
   // Listen for if sensitive information should be hidden or not
   const secret_checkbox = document.querySelector("#secret-check");
   secret_checkbox.addEventListener("change", (event) => {

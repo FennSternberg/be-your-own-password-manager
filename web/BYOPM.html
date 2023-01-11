@@ -106,6 +106,9 @@
             type="button"
             data-clipboard-target="#hash"
             id="copy-button"
+            data-bs-toggle="tooltip" 
+            data-bs-placement="right" 
+            title=""
           >
             <img
               width="13"
@@ -208,5 +211,13 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"
     ></script>
+    <script>
+      // Initialize tooltips
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+      })
+      </script>
+ 
   </body>
 </html>
