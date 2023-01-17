@@ -1,2 +1,3 @@
-# easysafepass
-Collection of docs implementing the SHA-256 algorithm to create a easy and secure way of generating passwords
+# Be Your Own Password Manager
+
+Web application for generating multiple passwords by hashing a single secret phrase with the SHA256 algorithm. Includes options for ensuring comliance with a sites specific password requirements.
