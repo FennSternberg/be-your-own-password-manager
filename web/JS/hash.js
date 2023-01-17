@@ -1,41 +1,59 @@
-hash = "";
+/**
+ * Hashes a given string using the SHA-256 algorithm
+ * @param {string} string
+ * @returns {Promise<ArrayBuffer>}
+ */
 async function sha256(string) {
   const encoder = new TextEncoder();
   const data = encoder.encode(string);
   const hashBuffer = await window.crypto.subtle.digest("SHA-256", data);
   return hashBuffer;
 }
+
+/**
+ * Converts an ArrayBuffer to a hex string
+ * @param {ArrayBuffer} buffer
+ * @returns {string}
+ */
 async function bufferToHex(buffer) {
   return Array.prototype.map
     .call(new Uint8Array(buffer), (x) => ("00" + x.toString(16)).slice(-2))
     .join("");
 }
-async function hashPassword() {
-  const secret_phrase = document.querySelector("#secret-phrase").value;
-  const site_name = document.querySelector("#site-name").value.toUpperCase();
-  const hashBuffer = await sha256(secret_phrase + site_name);
-  hash = await bufferToHex(hashBuffer);
-  comply_with_site();
+
+/**
+ * Hashes a password using a given secret phrase and site name
+ * @param {string} secretPhrase
+ * @param {string} siteName
+ * @returns {Promise<string>}
+ */
+async function hashPassword(secretPhrase, siteName) {
+  const hashBuffer = await sha256(secretPhrase + siteName);
+  const hashedPassword = await bufferToHex(hashBuffer);
+  return hashedPassword;
 }
-function comply_with_site() {
-  const ending = document.querySelector("#ending").value;
-  password = hash + ending;
-  const length_check = document.querySelector("#length-check");
-  const pass_length = document.querySelector("#length");
-  pass_length.max = password.length;
-  pass_length.min = ending.length;
-  if (Number(pass_length.value) > Number(pass_length.max)) {
-    pass_length.value = pass_length.max;
+
+/**
+ * Complies the password with the specified site's requirements
+ * @param {string} ending
+ * @param {HTMLInputElement} passLength
+ * @param {HTMLInputElement} lengthCheck
+ * @param {string} hash
+ * @returns {string}
+ */
+function complyWithSite(ending, passLength, lengthCheck, hash) {
+  const password = hash + ending;
+  passLength.max = password.length;
+  passLength.min = ending.length;
+  if (Number(passLength.value) > Number(passLength.max)) {
+    passLength.value = passLength.max;
   }
-  if (length_check.checked) {
-    document.querySelector("#hash").innerHTML = password.slice(
-      -pass_length.value
-    );
+  let newPassword;
+  if (lengthCheck.checked) {
+    newPassword = password.slice(-passLength.value);
   } else {
-    pass_length.value = password.length;
-    document.querySelector("#hash").innerHTML = password;
+    passLength.value = password.length;
+    newPassword = password;
   }
-}
-function appendEnding() {
-  hash.innerHTML = hash + document.querySelector("#ending").value;
+  return newPassword;
 }

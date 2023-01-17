@@ -25,8 +25,7 @@
               type="text"
               id="secret-phrase"
               name="secret-phrase"
-              oninput="hashPassword()"
-              class="form-control"
+              class="form-control hash-pw"
               placeholder="correct horse battery staple"
             />
             <label for="secret-phrase">Secret Phrase</label>
@@ -38,8 +37,7 @@
               type="text"
               id="site-name"
               name="site-name"
-              oninput="hashPassword()"
-              class="form-control"
+              class="form-control hash-pw"
               placeholder="TWITTER"
             />
             <label for="site-name">Site Name</label>
@@ -51,8 +49,7 @@
               type="text"
               id="ending"
               name="ending"
-              oninput="comply_with_site()"
-              class="form-control"
+              class="form-control hash-pw"
               placeholder="4N&&N"
               value="4N&&N"
             />
@@ -62,7 +59,7 @@
       </div>
       <div class="form-check form-switch form-check-inline">
         <input
-          class="form-check-input"
+          class="form-check-input hash-pw"
           type="checkbox"
           value=""
           id="length-check"
@@ -88,12 +85,11 @@
             type="number"
             id="length"
             name="length"
-            class="form-control"
+            class="form-control hash-pw"
             value="69"
             placeholder="69"
             max="69"
             step="1"
-            oninput="comply_with_site()"
           />
           <label for="length">Password Length</label>
         </div>
@@ -148,7 +144,7 @@
             The "Ending" value is appended to the resulting hash, this is useful
             for sites that have specific password requirements. The result is
             your password for that site. Continuing the example, if the "Ending"
-            is "4N&&N" (which, by the way, is insane Jeremy) then the resulting
+            is "4N&&N" (which is insane) then the resulting
             password would be
             <span class="text-break"
               >00b6ff70854bed3f5ea0f50aeae8a1f66a90b95449c2e28bbcfa4acbc3905b8f4N&&N </span
